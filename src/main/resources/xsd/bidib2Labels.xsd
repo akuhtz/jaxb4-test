@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.bidib.org/schema/nodeLabels/1.0" 
+	xmlns:labels="http://www.bidib.org/schema/nodeLabels/1.0" targetNamespace="http://www.bidib.org/schema/nodeLabels/1.0"
+	xmlns:base="http://www.bidib.org/schema/bidibbase/1.0"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	version="0.1">
+	
+	<xsd:import namespace="http://www.bidib.org/schema/bidibbase/1.0" schemaLocation="bidib2Base.xsd"/>
+	
+
+	<xsd:complexType name="PortLabel">
+		<xsd:complexContent>
+			<xsd:extension base="base:BaseLabel">
+				<xsd:attribute name="type" type="base:PortType" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="AccessoryLabel">
+		<xsd:complexContent>
+			<xsd:extension base="base:BaseLabel">
+				<xsd:sequence>
+					<xsd:element name="aspectLabel" type="base:BaseLabel" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- PortLabels Collection -->
+	<xsd:element name="portLabels">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="portLabel" type="PortLabel" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="portKey">
+        	<xsd:selector xpath="labels:portLabel" />
+        	<xsd:field    xpath="@index" />
+        	<xsd:field    xpath="type" />
+      	</xsd:unique>
+	</xsd:element>
+
+	<!-- FeedbackPortLabels Collection -->
+	<xsd:element name="feedbackPortLabels">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="portLabel" type="base:BaseLabel" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="feedbackKey">
+        	<xsd:selector xpath="labels:portLabel" />
+        	<xsd:field    xpath="@index" />
+      	</xsd:unique>
+	</xsd:element>
+
+	<!-- FeedbackPositionLabels Collection -->
+	<xsd:element name="feedbackPositionLabels">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="portLabel" type="base:BaseLabel" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="feedbackPositionKey">
+        	<xsd:selector xpath="labels:portLabel" />
+        	<xsd:field    xpath="@index" />
+      	</xsd:unique>
+	</xsd:element>
+
+	<!-- MacroLabels Collection -->
+	<xsd:element name="macroLabels">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="macroLabel" type="base:BaseLabel" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="macroKey">
+        	<xsd:selector xpath="labels:macroLabel" />
+        	<xsd:field    xpath="@index" />
+      	</xsd:unique>
+	</xsd:element>
+
+	<!-- FlagLabels Collection -->
+	<xsd:element name="flagLabels">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="flagLabel" type="base:BaseLabel" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="flagKey">
+        	<xsd:selector xpath="labels:flagLabel" />
+        	<xsd:field    xpath="@index" />
+      	</xsd:unique>
+	</xsd:element>
+
+	<!-- AccessoryLabels Collection -->
+	<xsd:element name="accessoryLabels">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="accessoryLabel" type="AccessoryLabel" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="accessoryKey">
+        	<xsd:selector xpath="labels:accessoryLabel" />
+        	<xsd:field    xpath="@index" />
+      	</xsd:unique>
+	</xsd:element>
+
+	<!-- NodeLabel Element -->
+	<xsd:element name="nodeLabel">
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="base:BaseNode">
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="NodeLabels">
+		<xsd:sequence>
+			<xsd:element ref="nodeLabel" minOccurs="0" />
+			<xsd:element ref="feedbackPortLabels" minOccurs="0" />
+			<xsd:element ref="portLabels" minOccurs="0" />
+			<xsd:element ref="macroLabels" minOccurs="0" />
+			<xsd:element ref="accessoryLabels" minOccurs="0" />
+			<xsd:element ref="flagLabels" minOccurs="0" />
+			<xsd:element ref="feedbackPositionLabels" minOccurs="0" />
+		</xsd:sequence>
+		<xsd:attribute name="defaultLabelsApplied" type="base:DefaultLabelsActionType" default="UNKNOWN" />
+        <xsd:attribute name="lang" type="xsd:string"/>
+	</xsd:complexType>
+
+	<!-- NodeLabels Root Element -->
+	<xsd:element name="nodeLabels" type="NodeLabels" >
+	</xsd:element>
+
+</xsd:schema>

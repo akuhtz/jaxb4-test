@@ -1,0 +1,19 @@
+<jxb:bindings version="1.0" 
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+  jxb:extensionBindingPrefixes="xjc">
+
+    <jxb:bindings schemaLocation="../resources/xsd/bidib2Base.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.bidib.jbidibc.core.schema.bidibbase"></jxb:package>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+    <jxb:bindings schemaLocation="../resources/xsd/bidib2Labels.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.bidib.jbidibc.core.schema.bidiblabels"></jxb:package>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+</jxb:bindings>

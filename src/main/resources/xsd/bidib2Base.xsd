@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.bidib.org/schema/bidibbase/1.0" targetNamespace="http://www.bidib.org/schema/bidibbase/1.0"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	version="0.1">
+	
+	<!-- type definition -->
+	<xsd:simpleType name="UnsignedByte">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="255" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Int16">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="65535" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="UniqueIdType">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="0" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- BaseNode Element -->
+	<xsd:complexType name="BaseNode">
+		<xsd:attribute name="userName" type="xsd:string" />
+		<xsd:attribute name="productName" type="xsd:string" />
+		<xsd:attribute name="uniqueId" type="UniqueIdType" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="PortType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ANALOGOUT" />
+			<xsd:enumeration value="BACKLIGHT" />
+			<xsd:enumeration value="INPUT" />
+			<xsd:enumeration value="LIGHT" />
+			<xsd:enumeration value="MOTOR" />
+			<xsd:enumeration value="SERVO" />
+			<xsd:enumeration value="SOUND" />
+			<xsd:enumeration value="SWITCH" />
+			<xsd:enumeration value="SWITCHPAIR" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="DefaultLabelsActionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="UNKNOWN" />
+			<xsd:enumeration value="APPLIED" />
+			<xsd:enumeration value="IGNORED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="BaseLabel">
+		<xsd:attribute name="index" type="UnsignedByte" use="required" />
+		<xsd:attribute name="label" type="xsd:string" />
+	</xsd:complexType>
+
+</xsd:schema>
